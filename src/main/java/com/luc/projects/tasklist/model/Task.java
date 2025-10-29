@@ -1,6 +1,7 @@
 package com.luc.projects.tasklist.model;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import javax.swing.text.StyledEditorKit;
 import java.time.LocalDate;
@@ -67,10 +68,6 @@ public class Task {
 
     public void setResponsavel(Responsavel responsavel) {
         this.responsavel = responsavel;
-    }
-
-    public LocalDate dataAgora(){
-        return LocalDate.now();
     }
 
     // Em Task.java

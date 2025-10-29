@@ -1,11 +1,15 @@
 package com.luc.projects.tasklist.service.impl;
 
+import com.luc.projects.tasklist.model.Responsavel;
 import com.luc.projects.tasklist.model.Task;
 import com.luc.projects.tasklist.repository.TaskRepository;
+import com.luc.projects.tasklist.service.ResponsavelService;
 import com.luc.projects.tasklist.service.TaskService;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -26,8 +30,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task createTask(Task newTask) {
-        return null;
+    public Task saveTask(Task newTask) {
+        return taskRepository.save(newTask);
     }
 
     @Override
@@ -39,6 +43,8 @@ public class TaskServiceImpl implements TaskService {
     public Task updateTask(Long id, Task newTask) {
         return null;
     }
+
+
 
     @Override
     public Boolean hasTasks() {

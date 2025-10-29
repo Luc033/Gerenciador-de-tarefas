@@ -2,31 +2,51 @@ package com.luc.projects.tasklist.controller;
 
 
 import com.luc.projects.tasklist.model.Responsavel;
+import com.luc.projects.tasklist.model.Task;
+import com.luc.projects.tasklist.service.ResponsavelService;
 import com.luc.projects.tasklist.service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TaskController {
     TaskService taskService;
+    ResponsavelService responsavelService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, ResponsavelService responsavelService) {
         this.taskService = taskService;
+        this.responsavelService = responsavelService;
     }
 
-// Criar
+    // Acessar a página de criação de tarefa form-task.html
+    @GetMapping("task/new")
+    public String novaTarefa(ModelMap model){
+        model.addAttribute("task", new Task());
+        model.addAttribute("resps", responsavelService.findAllResponsavel());
+        return "form-task";
+    }
 
+    // Criar nova tarefa
+    @PostMapping("/task/save")
+    public String novaTarefa( Task newTask){
+        newTask.setConcluido(false);
+        taskService.saveTask(newTask);
+        return "redirect:/home";
+    }
 
     // Remover
 
-    // Atualizar
+    // Ver uma tarefa antes de EDITAR
+    @GetMapping("task/edit/{id}")
+    public String editarTarefa(@PathVariable Long id, ModelMap model) throws NoSuchFieldException {
+        model.addAttribute("task", taskService.findByIdTask(id));
+        model.addAttribute("resps", responsavelService.findAllResponsavel());
 
-    // Ver um
+        return "form-task";
+    }
+
 
     // Ver lista
     @GetMapping("/home")
@@ -34,5 +54,12 @@ public class TaskController {
         model.addAttribute("tasks", taskService.findAllTask());
         return "home";
     }
+
+    @GetMapping("/")
+    public String redirecionarHome(){
+        return "redirect:/home";
+    }
+
+
 
 }
