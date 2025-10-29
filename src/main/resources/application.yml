@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: tasklist
+
+  # Configuração do Banco de Dados
+  datasource:
+    # ATENÇÃO: Verifique a porta! O padrão do MySQL é 3306, não 3000.
+    url: jdbc:mysql://localhost:3000/bd_tasklist?createDatabaseIfNotExist=true
+    username: root
+    # NUNCA coloque senhas reais aqui em produção. Use Variáveis de Ambiente.
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Configuração do JPA (Hibernate)
+  jpa:
+    hibernate:
+      # 'update' é OK para dev, mas NUNCA use em produção.
+      # Em produção, use 'validate' ou 'none' e gerencie com Flyway/Liquibase.
+      ddl-auto: update
+
+    # 'show-sql: true' é ótimo para debug, mas desative em produção.
+    show-sql: true
+
+    # 'open-in-view: false' é a melhor prática.
+    # Força você a carregar os dados corretamente no Service e evita problemas de performance.
+    open-in-view: false
+
+    properties:
+      hibernate:
+        # Formata o SQL impresso no console (quando show-sql=true), muito melhor para ler.
+        format_sql: true
+#  logging:
+#    level:
+#      org.hibernate.SQL: DEBUG
+#      org.hibernate.type.descriptor.sql: TRACE
