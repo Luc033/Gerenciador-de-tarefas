@@ -19,6 +19,16 @@
 
     <a class="btn btn-success btn-lg" th:href="@{/task/new}"><i class="fa-solid fa-circle-plus"></i> Nova tarefa</a>
     <table class="table table-striped table-responsive-md w-75 p-1">
+        <thead>
+        <tr>
+            <td>Tarefa</td>
+            <td>Responsável</td>
+            <td>Criado em</td>
+            <td>Status</td>
+            <td>Ações</td>
+
+        </tr>
+        </thead>
 
         <tr th:each="task : ${tasks}" th:classappend="${task.concluido} ? 'task-concluida' : '' ">
             <td th:text="${task.descricao}"></td>

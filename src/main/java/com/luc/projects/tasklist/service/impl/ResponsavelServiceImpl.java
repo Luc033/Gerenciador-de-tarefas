@@ -22,6 +22,7 @@ public class ResponsavelServiceImpl implements ResponsavelService {
 
     @Override
     public List<Responsavel> findAllResponsavel() {
+
         return responsavelRepository.findAll().stream()
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
@@ -29,8 +30,13 @@ public class ResponsavelServiceImpl implements ResponsavelService {
 
     @Override
     public Responsavel createResponsavel(Responsavel newResponsavel) {
-        return null;
+        if (newResponsavel.getId() == null) {
+            return responsavelRepository.save(newResponsavel);
+        } else if (responsavelRepository.existsByNome(newResponsavel.getNome())) {
+        }
+        throw new IllegalArgumentException(String.format("Responsável %s já existe.", newResponsavel.getNome()));
     }
+
 
     @Override
     public Responsavel findByIdResponsavel(Long id) {

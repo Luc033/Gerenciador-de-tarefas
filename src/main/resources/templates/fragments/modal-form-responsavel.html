@@ -1,0 +1,40 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+
+    <button th:fragment="modal-btn-responsavel" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-circle-plus"></i>
+    </button>
+
+    <!-- Modal -->
+    <div th:fragment="modal-form-responsavel" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form th:action="@{/responsavel/save}" th:method="post" th:object="${responsavel}">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Novo responsável</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label for="nomeResponsavel">Nome:</label>
+                        <input type="text" name="" id="nomeResponsavel" th:field="*{nome}">
+                    </div>
+                    <div>
+                        <label for="senhaResponsavel">Senha:</label>
+                        <input type="password" name="" id="senhaResponsavel" th:field="*{password}">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" >Salvar</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</html>

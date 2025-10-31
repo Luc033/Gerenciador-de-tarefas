@@ -16,6 +16,8 @@
 
 
     <h1>NOVA TAREFA</h1>
+
+
     <form class="form d-flex flex-column"
           th:action="${task.getId == null} ? @{/task/save} : @{/task/edit}" th:method="POST" th:object="${task}">
         <input type="hidden" th:field="*{id}">
@@ -28,22 +30,27 @@
             <label for="dataTarefa">Data de entrega</label>
             <input class="form-control" type="date" id="dataTarefa" th:field="*{dataEntrega}">
         </div>
-        <div class="mb-3">
+        <div class="d-flex flex-row justify-content-center align-items-center  mb-3 gap-3">
             <label class="form-label" for="responsavelTarefa">Responsável</label>
             <select th:field="*{responsavel}"  name="" id="responsavelTarefa">
                 <option value="" >Selecione o responsável</option>
                 <option th:each="resp : ${resps}"  th:value="${resp.getId}"
                         th:text="${resp.nome}">
-                     </option>
-
+                </option>
             </select>
-            <button title="Adicionar responsável" class="btn btn-outline-success" type="button" href="/teste"><i class="fa fa-plus"></i></button>
+            <btn th:replace="~{fragments/modal-form-responsavel :: modal-btn-responsavel}" class="btn" href="/responsavel/new"> </btn>
+
         </div>
         <input class="btn btn-success form-control" type="submit"  value="Salvar">
     </form>
+
+    <div th:replace="~{fragments/modal-form-responsavel :: modal-form-responsavel}"></div>
+
 </main>
 
 <script src="https://kit.fontawesome.com/2ca9804ec8.js" crossorigin="anonymous"></script>
 <script th:replace="~{fragments/js-dataEntrega.html :: js-dataEntrega}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

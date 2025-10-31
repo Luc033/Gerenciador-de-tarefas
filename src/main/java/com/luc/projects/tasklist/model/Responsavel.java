@@ -13,6 +13,8 @@ public class Responsavel {
     private Long id;
     @Column(name = "nome_responsavel")
     private String nome;
+    @Column(name = "password_responsavel")
+    private String password;
 
     @OneToMany(mappedBy="responsavel",
             cascade = CascadeType.ALL, // Salva/Atualiza/Deleta as Tasks junto com o Responsavel
@@ -42,6 +44,14 @@ public class Responsavel {
 
     public void setTaskList(List<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

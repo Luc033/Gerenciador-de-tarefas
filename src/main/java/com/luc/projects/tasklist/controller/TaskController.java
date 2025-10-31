@@ -24,6 +24,7 @@ public class TaskController {
     @GetMapping("task/new")
     public String novaTarefa(ModelMap model){
         model.addAttribute("task", new Task());
+        model.addAttribute("responsavel", new Responsavel());
         model.addAttribute("resps", responsavelService.findAllResponsavel());
         return "form-task";
     }

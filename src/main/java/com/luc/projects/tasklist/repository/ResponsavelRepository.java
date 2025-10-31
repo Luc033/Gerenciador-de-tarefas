@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResponsavelRepository extends JpaRepository<Responsavel, Long> {
 
+    boolean existsByNome(String nome);
 }
