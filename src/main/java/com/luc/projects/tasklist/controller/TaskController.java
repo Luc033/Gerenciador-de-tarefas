@@ -40,6 +40,16 @@ public class TaskController {
 
     // Ver uma tarefa antes de EDITAR
     @GetMapping("task/edit/{id}")
+    public String preEditarTarefa(@PathVariable Long id, ModelMap model) throws NoSuchFieldException {
+        model.addAttribute("task", taskService.findByIdTask(id));
+        model.addAttribute("resps", responsavelService.findAllResponsavel());
+
+        return "form-task";
+    }  
+
+
+    // Editar uma tarefa antes de EDITAR
+    @PostMapping("task/edit/{id}")
     public String editarTarefa(@PathVariable Long id, ModelMap model) throws NoSuchFieldException {
         model.addAttribute("task", taskService.findByIdTask(id));
         model.addAttribute("resps", responsavelService.findAllResponsavel());
