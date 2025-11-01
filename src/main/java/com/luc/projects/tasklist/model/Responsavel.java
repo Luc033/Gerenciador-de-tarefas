@@ -11,7 +11,7 @@ public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nome_responsavel")
+    @Column(name = "nome_responsavel", unique = true)
     private String nome;
     @Column(name = "password_responsavel")
     private String password;

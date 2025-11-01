@@ -7,45 +7,53 @@
           rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/style/style.css}">
     <title>Home</title>
 </head>
-<body>
+<body class="bg-light">
 <header th:replace="~{fragments/header :: header}"></header>
 
-<main class="d-flex flex-column flex-lg-column mb-3 justify-content-center align-items-center">
+<main class="d-flex flex-column flex-lg-column mb-3 justify-content-around align-items-center gap-4">
 
+    <div class="text-left w-75">
+        <h1 class="fs-3">Listas de todas as tarefas registradas:</h1>
+    </div>
 
-    <h1>PÁGINA INICIAL</h1>
-
-    <a class="btn btn-success btn-lg" th:href="@{/task/new}"><i class="fa-solid fa-circle-plus"></i> Nova tarefa</a>
-    <table class="table table-striped table-responsive-md w-75 p-1">
+    <table class="text-center table table-striped-columns border table-responsive-md w-75">
         <thead>
         <tr>
-            <td>Tarefa</td>
-            <td>Responsável</td>
-            <td>Criado em</td>
-            <td>Status</td>
-            <td>Ações</td>
+            <td class=" " style="width: 30% ">Tarefa</td>
+            <td  class="mw-25  ">Responsável</td>
+            <td class="mw-25  ">Criado em</td>
+            <td  class="mw-25  ">Status</td>
+            <td class="mw-25  " >Ações</td>
 
         </tr>
         </thead>
+    <tbody class="table-group-divider">
+        <tr  class="" th:each="task : ${tasks}" >
+            <td th:text="${task.descricao}" th:classappend="${task.concluido} ? 'text-secondary text-opacity-75 text-decoration-line-through' : '' "></td>
+            <td th:text="${task.responsavel?.nome}" th:classappend="${task.concluido} ? 'text-secondary text-opacity-75 text-decoration-line-through' : '' "></td>
+            <td th:text="${#temporals.format(task.dataEntrega, 'dd/MM/yyyy')}" th:classappend="${task.concluido} ? 'text-secondary text-opacity-75 text-decoration-line-through' : '' "></td>
+            <td th:text="${task.concluido ? 'Concluído' : 'Em aberto'}" th:classappend="${task.concluido} ? 'text-secondary text-opacity-75 text-decoration-line-through' : '' "></td>
 
-        <tr th:each="task : ${tasks}" th:classappend="${task.concluido} ? 'task-concluida' : '' ">
-            <td th:text="${task.descricao}"></td>
-            <td th:text="${task.responsavel?.nome}"></td>
-            <td th:text="${#temporals.format(task.dataEntrega, 'dd/MM/yyyy')}"></td>
-            <td th:text="${task.concluido ? 'Concluído' : 'Em aberto'}"></td>
-
-            <td><a th:href="@{/task/edit/{id} (id=${task.getId})}">Editar</a> <a th:href="@{/task/delete/{id} (id=${task.getId})}">Remover</a> <a th:href="@{/task/completed/{id} (id=${task.getId})}">Concluir</a></td>
+            <td class="">
+                <button class="btn" type="button" th:src="@{/task/edit/{id} (id=${task.getId})}" title="Editar"><i class="text-primary fa-solid fa-pen"></i></button>
+                <button class="btn"  type="button" th:href="@{/task/delete/{id} (id=${task.getId})}" title="Remover"><i class="text-danger fa-solid fa-trash"></i></button>
+                <button class="btn"  type="button" th:if="${!task.getConcluido()}" th:href="@{/task/completed/{id} (id=${task.getId})}" title="Concluir"><i class="text-success fa-solid fa-circle-check"></i></button>
+            </td>
         </tr>
-        <tr th:if="${#lists.isEmpty(tasks)}">
+        <tr  class="" th:if="${#lists.isEmpty(tasks)}">
             <td>Não há tarefas criadas.</td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
         </tr>
+    </tbody>
     </table>
+    <a class="text-success btn-lg p-0 border-0" th:href="@{/task/new}" title="Inserir nova tarefa"><i class="fa-solid fa-square-plus fs-1 fa-beat-fade"></i></a>
+
 </main>
 
 <script src="https://kit.fontawesome.com/2ca9804ec8.js" crossorigin="anonymous"></script>

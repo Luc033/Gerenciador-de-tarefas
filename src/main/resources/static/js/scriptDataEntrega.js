@@ -1,0 +1,25 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // Pega o elemento do input de data
+    const dateInput = document.getElementById('dataTarefa');
+
+    // VERIFICA SE O CAMPO ESTÁ VAZIO
+    // (Se não estiver vazio, é porque o th:field preencheu, ex: num 'editar')
+    if (!dateInput.value) {
+
+        // Cria um objeto de data de hoje
+        const today = new Date();
+
+        // Formata a data para o padrão 'yyyy-MM-dd' que o input type="date" espera
+        const yyyy = today.getFullYear();
+        // getMonth() retorna 0-11, por isso +1. padStart garante '09' em vez de '9'
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+
+        const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+        // Define o valor do input
+        dateInput.value = formattedDate;
+        console.log("Console funcionando DENTRO do IF")
+    }
+    console.log("Console funcionando fora do IF")
+});

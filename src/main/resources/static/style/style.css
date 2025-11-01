@@ -1,0 +1,27 @@
+body{
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    height: 1000px;
+}
+main{
+    margin-top: 5%;
+}
+thead td{
+    font-size: 14pt;
+}
+tbody td{
+    font-size: 12pt;
+}
+
+header{
+        /*top: 0;*/
+        /*position: fixed;*/
+    height: 5rem;
+    width: 100%;
+}
+
+.svg-logo{
+    width: 4em;
+    height: auto;
+}
