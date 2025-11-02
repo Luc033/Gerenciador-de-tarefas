@@ -8,18 +8,18 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/style/style.css}">
-    <title>Home</title>
+    <title>Início</title>
 </head>
-<body class="bg-light">
+<body class="bg-light d-flex flex-column min-vh-100">
 <header th:replace="~{fragments/header :: header}"></header>
 
-<main class="d-flex flex-column flex-lg-column mb-3 justify-content-around align-items-center gap-4">
+<main class="d-flex flex-column flex-lg-column mb-3 justify-content-around align-items-center gap-4 flex-grow-1">
 
     <div class="text-left w-75">
         <h1 class="fs-3">Listas de todas as tarefas registradas:</h1>
     </div>
 
-    <table class="text-center table table-striped-columns border table-responsive-md w-75">
+    <table class="text-center table table-striped border table-responsive-md w-75">
         <thead>
         <tr>
             <td class=" " style="width: 30% ">Tarefa</td>
@@ -38,9 +38,9 @@
             <td th:text="${task.concluido ? 'Concluído' : 'Em aberto'}" th:classappend="${task.concluido} ? 'text-secondary text-opacity-75 text-decoration-line-through' : '' "></td>
 
             <td class="">
-                <button class="btn" type="button" th:src="@{/task/edit/{id} (id=${task.getId})}" title="Editar"><i class="text-primary fa-solid fa-pen"></i></button>
-                <button class="btn"  type="button" th:href="@{/task/delete/{id} (id=${task.getId})}" title="Remover"><i class="text-danger fa-solid fa-trash"></i></button>
-                <button class="btn"  type="button" th:if="${!task.getConcluido()}" th:href="@{/task/completed/{id} (id=${task.getId})}" title="Concluir"><i class="text-success fa-solid fa-circle-check"></i></button>
+                <a class="btn" type="button" th:href="@{/task/edit/{id} (id=${task.getId})}" title="Editar"><i class="text-primary fa-solid fa-pen"></i></a>
+                <a class="btn"  type="button" th:href="@{/task/delete/{id} (id=${task.getId})}" title="Remover"><i class="text-danger fa-solid fa-trash"></i></a>
+                <a class="btn"  type="button" th:if="${!task.getConcluido()}" th:href="@{/task/completed/{id} (id=${task.getId})}" title="Concluir"><i class="text-success fa-solid fa-circle-check"></i></a>
             </td>
         </tr>
         <tr  class="" th:if="${#lists.isEmpty(tasks)}">
@@ -55,6 +55,7 @@
     <a class="text-success btn-lg p-0 border-0" th:href="@{/task/new}" title="Inserir nova tarefa"><i class="fa-solid fa-square-plus fs-1 fa-beat-fade"></i></a>
 
 </main>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 
 <script src="https://kit.fontawesome.com/2ca9804ec8.js" crossorigin="anonymous"></script>
 </body>

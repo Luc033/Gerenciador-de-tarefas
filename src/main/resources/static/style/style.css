@@ -1,27 +1,78 @@
-body{
-    overflow-y: scroll;
+/* Definição das cores fornecidas em variáveis para facilidade de uso: */
+:root {
+    --cor-a: #236877; /* Verde Azulado Escuro */
+    --cor-b: #28404c; /* Cinza Ardósia Escuro */
+    --cor-c: #297c8b; /* Ciano Acinzentado */
+    --cor-d: #1a2931; /* Quase Preto */
+}
+
+/* 1. Gradiente Sóbrio e Profundo (Marinho para Quase Preto) */
+.bg-gradient-sombrio {
+    /* Gradiente da Cor B (Clara) para a Cor D (Escura) */
+    --bg-custom-gradient: linear-gradient(135deg, var(--cor-b), var(--cor-d));
+    background-image: var(--bg-custom-gradient);
+}
+
+/* 2. Gradiente Vibrante e Moderno (Verde Azulado para Ciano) */
+.bg-gradient-vibrante {
+    /* Gradiente da Cor A para a Cor C */
+    --bg-custom-gradient: linear-gradient(45deg, var(--cor-a), var(--cor-c));
+    background-image: var(--bg-custom-gradient);
+}
+
+/* 3. Gradiente Suave (Azulado Escuro para Cinza Ardósia) */
+.bg-gradient-suave {
+    /* Gradiente da Cor A para a Cor B */
+    --bg-custom-gradient: linear-gradient(90deg, var(--cor-a), var(--cor-b));
+    background-image: var(--bg-custom-gradient);
+}
+
+html, body{
+    overflow-y: auto;
     margin: 0;
     padding: 0;
-    height: 1000px;
-}
-main{
-    margin-top: 5%;
-}
-thead td{
-    font-size: 14pt;
-}
-tbody td{
-    font-size: 12pt;
+    height: 100%;
+
 }
 
 header{
-        /*top: 0;*/
-        /*position: fixed;*/
-    height: 5rem;
+    top: 0;
+    position: fixed;
+    height: auto;
     width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.52) 0px 3px 6px 1px;
+
 }
 
-.svg-logo{
-    width: 4em;
-    height: auto;
+main{
+    margin-top: 7%;
+    max-height: 100%;
+}
+
+main table{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 3px;
+}
+
+#form-task{
+    box-shadow: rgba(0, 0, 0, 0.41) 0px 0px 3px;
+}
+
+thead td, #form-task label {
+    font-size: 14pt;
+}
+tbody td, #form-task input  {
+    font-size: 12pt;
+}
+
+#form-task input {
+    box-shadow: rgba(255, 255, 255, 0.42) 0px 0px 2px;
+}
+
+footer{
+    box-shadow: inset #0000007d 0 8px 9px -5px;
+}
+
+.footer-itens{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 3px 2px;
+
 }

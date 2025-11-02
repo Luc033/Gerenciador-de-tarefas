@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
 
-    <button th:fragment="modal-btn-responsavel" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <i class="fa fa-circle-plus"></i>
+    <button title="Adicionar novo responsável" th:fragment="modal-btn-responsavel" type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="fa fa-plus"></i>
     </button>
 
     <!-- Modal -->
@@ -17,14 +17,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        <label for="nomeResponsavel">Nome:</label>
-                        <input type="text" name="" id="nomeResponsavel" th:field="*{nome}">
+                    <div class="mb-3">
+                        <label class="form-label" for="nomeResponsavel">Nome:</label>
+                        <input class="form-control" type="text" name="" id="nomeResponsavel" th:field="*{nome}">
                     </div>
-                    <div>
-                        <label for="senhaResponsavel">Senha:</label>
-                        <input type="password" name="" id="senhaResponsavel" th:field="*{password}">
-
+                    <div class="mb-3">
+                        <label class="form-label" for="senhaResponsavel">Senha:</label>
+                        <input class="form-control" type="password" name="" id="senhaResponsavel" th:field="*{password}" minlength="4">
                     </div>
                 </div>
                 <div class="modal-footer">

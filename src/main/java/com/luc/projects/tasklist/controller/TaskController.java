@@ -88,6 +88,11 @@ public class TaskController {
             throw new IllegalArgumentException("\"Tarefa já concluída: \" + t");
         }
     }
+    
+    @GetMapping("aboutme")
+    public String aboutMe(ModelMap model){
+        return "aboutme";
+    }
 
 
 }
