@@ -13,11 +13,51 @@
 <body class="bg-light d-flex flex-column min-vh-100">
 <header th:replace="~{fragments/header :: header}"></header>
 
-<main class="d-flex flex-column flex-lg-column mb-3 justify-content-around align-items-center gap-4 flex-grow-1">
-    <h1 class="fs-3">Saiba mais</h1>
+<main class="about-container">
+
+    <section class="about-header">
+        <h1 class="about-title">Mais que Tarefas, Propósito.</h1>
+        <p class="about-intro">
+            Esta aplicação nasceu de uma reflexão simples: a gestão moderna não é sobre estar ocupado, é sobre ter clareza.
+            Não é sobre controlar cada minuto, mas sobre dar direção a cada dia.
+        </p>
+        <p class="about-intro">
+            Em meio ao ruído constante, esta ferramenta é um convite para separar o essencial do acessório.
+        </p>
+    </section>
+
+    <section class="philosophy-grid">
+
+        <div class="philosophy-card">
+            <img class="card-image" th:src="@{/img/pedras-empilhadas.jpg}" alt="Pedras empilhadas simbolizando clareza e foco">
+            <h3 class="card-title">Clareza</h3>
+            <p class="card-text">
+                O primeiro passo para a produtividade é saber para onde olhar. Defina o que realmente importa.
+            </p>
+        </div>
+
+        <div class="philosophy-card">
+            <img class="card-image" th:src="@{/img/bussola.jpg}" alt="Bússola simbolizando direção e propósito">
+            <h3 class="card-title">Propósito</h3>
+            <p class="card-text">
+                Uma tarefa sem propósito é apenas trabalho. Conecte suas ações diárias a objetivos maiores.
+            </p>
+        </div>
+
+        <div class="philosophy-card">
+            <img class="card-image" th:src="@{/img/caminho.jpg}" alt="Caminho ou estrada simbolizando ação e progresso">
+            <h3 class="card-title">Ação</h3>
+            <p class="card-text">
+                A clareza e o propósito só ganham vida através da ação. Transforme intenção em progresso tangível.
+            </p>
+        </div>
+
+    </section>
 
 </main>
 <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+
 
 <script src="https://kit.fontawesome.com/2ca9804ec8.js" crossorigin="anonymous"></script>
 </body>

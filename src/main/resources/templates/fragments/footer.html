@@ -1,36 +1,64 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 
-<footer class="bg-gradient-suave text-white d-flex flex-column justify-content-center align-items-center py-5 gap-5" th:fragment="footer">
-        <div class="d-flex flex-column justify-content-center align-items-between p-2 border-top border-start border-light border-opacity-50  border-3  rounded-5 ">
-            <p class="fs-5">A gestão de tarefas não é apenas sobre fazer as coisas; é sobre criar espaço para <span class="text-decoration-underline  ">fazer o trabalho que realmente importa. </span></p>
+<footer class="bg-gradient-sombrio text-white pt-5" th:fragment="footer">
+    <div class="container">
+
+        <div class="row mb-4">
+            <div class="col-12 col-md-10 offset-md-1 text-center">
+                <p class="fs-5 text-white-50 fst-italic">"A gestão de tarefas não é apenas sobre fazer as coisas; é sobre criar espaço para fazer o trabalho que realmente importa."</p>
+            </div>
         </div>
-    <div class="d-flex justify-content-evenly align-items-center p-2 w-100" style="max-height: 12rem">
-        <div class="footer-itens d-flex flex-column justify-content-center align-items-between p-4 bg-gradient-sombrio rounded-3">
-            <p>Criado com &#x2764;&#xfe0f; por:</p>
-            <img th:src="@{/img/TASKFLOW LOGO.png}" alt="Logo profissional">
-        </div>
-        <div class="footer-itens d-flex flex-column justify-content-center align-items-between p-4 bg-gradient-sombrio rounded-3">
-            <p>Redes sociais:</p>
-            <a class="link-light link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-               href="https://www.instagram.com"><i class="fa-brands fa-instagram fa-lg" style="color: #ffffff;"></i> Instagram</a>
-            <a class="link-light link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-               href="https://www.linkedin.com/in/lucas-melo-dev"><i class="fa-brands fa-linkedin fa-lg" style="color: #ffffff;"></i> Linkedin</a>
-            <a class="link-light link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-               href="https://www.github.com/Luc033"><i class="fa-brands fa-square-github fa-lg" style="color: #ffffff;"></i> Github</a>
-        </div>
-        <div class="footer-itens d-flex flex-column justify-content-center align-items-between p-4 w-25 bg-gradient-sombrio rounded-3" style="overflow-wrap: break-word;">
-            <p>TaskFlow é uma ferramenta minimalista que irá te auxíliar na gestão da suas tarefas.</p>
-            <a class="link-light link-offset-3 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-               th:href="@{/aboutme}">
-                <p>Saiba mais sobre sobre o que o TaskFlow pode fazer e ajudar na sua vida.</p>
-            </a>
+
+        <hr class="border-light border-opacity-25 my-4">
+
+        <div class="row">
+
+            <div class="col-12 col-md-4 mb-4">
+                <div class="footer-item">
+                    <p class="fw-bold fs-5">Criado com &#x2764;&#xfe0f; por:</p>
+                    <img th:src="@{/img/TASKFLOW LOGO.png}" alt="Logo da Empresa" style="max-height: 50px; width: auto;">
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-4">
+                <div class="footer-item">
+                    <p class="fw-bold fs-5">Redes sociais:</p>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a class="link-light link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                               href="https://www.instagram.com"><i class="fa-brands fa-instagram me-2"></i> Instagram</a>
+                        </li>
+                        <li>
+                            <a class="link-light link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                               href="https://www.linkedin.com/in/lucas-melo-dev"><i class="fa-brands fa-linkedin me-2"></i> Linkedin</a>
+                        </li>
+                        <li>
+                            <a class="link-light link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                               href="https://www.github.com/Luc033"><i class="fa-brands fa-square-github me-2"></i> Github</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4 mb-4">
+                <div class="footer-item">
+                    <p class="fw-bold fs-5">Sobre o TaskFlow:</p>
+                    <p>TaskFlow é uma ferramenta minimalista que irá te auxiliar na gestão da suas tarefas.</p>
+                    <a class="link-light link-offset-3 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                       th:href="@{/aboutme}">
+                        Saiba mais sobre o que o TaskFlow pode fazer.
+                    </a>
+                </div>
+            </div>
+        </div> <div class="row">
+        <div class="col-12 text-center border-top border-light border-opacity-25 pt-3 mt-3">
+            <div style="font-size: 8pt;">
+                Todos os direitos reservados &copy; 2025
+            </div>
         </div>
     </div>
 
-    <div class="mb-1 text-center" style="font-size: 8pt;">
-        Todos os direitos reservados &copy; 2025
+    </div> </footer>
 
-    </div>
-</footer>
 </html>
