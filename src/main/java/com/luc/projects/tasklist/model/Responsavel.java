@@ -1,6 +1,8 @@
 package com.luc.projects.tasklist.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 import java.util.Objects;
@@ -11,8 +13,14 @@ public class Responsavel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty(message = "O nome do usuário não pode estar vazio.")
+    @Size(min = 3, message = "Tamanho mínimo de 3 caracteres.")
     @Column(name = "nome_responsavel", unique = true)
     private String nome;
+
+    @NotEmpty(message = "A senha não pode estar vazia.")
+    @Size(min = 4, message = "Tamanho mínimo de 4 caracteres.")
     @Column(name = "password_responsavel")
     private String password;
 

@@ -1,6 +1,10 @@
 package com.luc.projects.tasklist.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.cglib.core.Local;
 
 import javax.swing.text.StyledEditorKit;
@@ -16,15 +20,20 @@ public class Task {
     @Column(name = "task_id")
     private Long id;
 
+    @NotEmpty(message = "A descrição não pode estar vaziao.")
+    @Size(min = 4, message = "A descrição deve ter no mínimo 3 caracteres.")
     @Column(unique = true, nullable = false)
     private String descricao;
 
+    @NotNull(message = "Data precisa ser preechida.")
+    @FutureOrPresent(message = "Data inválida. Não são permitidas datas passadas.")
     @Column()
     private LocalDate dataEntrega;
 
     @Column(name = "concluido")
     private Boolean concluido;
 
+    @NotNull(message = "O responsável não pode estar vazio.")
     @ManyToOne()
     @JoinColumn(name = "responsavel_id_fk")
     private Responsavel responsavel;
@@ -68,6 +77,10 @@ public class Task {
 
     public void setResponsavel(Responsavel responsavel) {
         this.responsavel = responsavel;
+    }
+
+    public void isConcluido(){
+        setConcluido(true);
     }
 
     // Em Task.java

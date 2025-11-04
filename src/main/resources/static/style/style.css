@@ -199,3 +199,13 @@ footer{
     padding: 0 1.5rem; /* Espaçamento interno para o texto */
 }
 
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+.form-field-error {
+    border: 1px solid red;
+    background-color: #ffe6e6;
+}

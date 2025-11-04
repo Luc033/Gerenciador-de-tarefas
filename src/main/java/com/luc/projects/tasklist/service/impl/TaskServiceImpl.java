@@ -21,7 +21,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task findByIdTask(Long id) throws NoSuchFieldException {
-        return taskRepository.findById(id).orElseThrow(NoSuchFieldException::new);
+        return taskRepository.findById(id).orElse(null);
     }
 
     @Override
