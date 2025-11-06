@@ -18,6 +18,8 @@
     <div class="text-left w-75">
         <h1 class="fs-3">Listas de todas as tarefas registradas:</h1>
     </div>
+    <div th:replace="~{fragments/toast-sucesso :: toast-sucesso}"></div>
+
 
     <table class="text-center table table-striped border table-responsive-md w-75">
         <thead>
@@ -58,5 +60,9 @@
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 <script src="https://kit.fontawesome.com/2ca9804ec8.js" crossorigin="anonymous"></script>
+<script th:src="@{/js/scriptFecharToast.js}" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 </body>
 </html>

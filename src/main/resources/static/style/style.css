@@ -68,21 +68,28 @@ html, body{
     padding: 0;
     height: 100%;
 
-}
 
+}
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
 header{
     top: 0;
     position: fixed;
     height: auto;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.52) 0px 3px 6px 1px;
+    flex-shrink: 0;
+
 
 }
 
 main{
     margin-top: 7%;
-    min-height: 100vh;
-    max-height: 100%;
+    flex-grow: 1;
 
 }
 
@@ -108,6 +115,8 @@ tbody td, #form-task input  {
 
 footer{
     box-shadow: inset #0000007d 0 8px 9px -5px;
+    flex-shrink: 0;
+
 }
 
 .footer-itens{
@@ -209,3 +218,7 @@ footer{
     border: 1px solid red;
     background-color: #ffe6e6;
 }
+
+.error-container { max-width: 600px; margin: auto; background: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+.error-container h1 { color: #d9534f; }
+.error-message { color: #333; font-size: 1.1em; background: #eee; padding: 15px; border-radius: 4px; }

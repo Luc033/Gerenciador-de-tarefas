@@ -11,5 +11,9 @@ public interface TaskService {
     Task saveTask(Task newTask);
     void deleteByIdTask(Long id);
     Task updateTask(Long id, Task newTask);
+
+    boolean verificaTaskDuplicada(Task newTask);
+
     Boolean hasTasks();
+    boolean descricaoJaExiste(String descricao);
 }

@@ -6,11 +6,13 @@ import com.luc.projects.tasklist.model.Task;
 import com.luc.projects.tasklist.service.ResponsavelService;
 import com.luc.projects.tasklist.service.TaskService;
 import jakarta.validation.Valid;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class TaskController {
@@ -33,17 +35,38 @@ public class TaskController {
 
     // Criar nova tarefa
     @PostMapping("/task/save")
-    public String novaTarefa(@Valid Task newTask, BindingResult result, ModelMap model) {
+    public String novaTarefa(@Valid @ModelAttribute("task") Task newTask,
+                             BindingResult result, ModelMap model,
+                             RedirectAttributes redirectAttributes) { // 2. Adicione como parâmetro
+
         if (result.hasErrors()) {
+            // 3. Adicione a mensagem de SUCESSO aqui
+            redirectAttributes.addFlashAttribute("mensagemSucesso", "Tarefa atualizada com sucesso!");
+
+            return "redirect:/home";
+        }
+        if (taskService.descricaoJaExiste(newTask.getDescricao())) {
+            result.rejectValue("descricao", "error.descricao", "Este nome de tarefa já está em uso.");
             model.addAttribute("responsavel", new Responsavel());
             model.addAttribute("resps", responsavelService.findAllResponsavel());
-
             return "form-task";
         }
+
         newTask.setConcluido(false);
-        System.out.println("Tarefa criada: " + newTask);
-        taskService.saveTask(newTask);
+        try{
+            taskService.saveTask(newTask);
+        }catch(Exception e){
+            result.rejectValue("descricao", "error.descricao", "Este nome de tarefa já está em uso.");
+            model.addAttribute("responsavel", new Responsavel());
+            model.addAttribute("resps", responsavelService.findAllResponsavel());
+            return "form-task";
+        }
+
+        // 3. Adicione a mensagem de SUCESSO aqui
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Tarefa criada com sucesso!");
+
         return "redirect:/home";
+
     }
 
     // Remover
@@ -64,36 +87,25 @@ public class TaskController {
     }
 
 
-    // Editar uma tarefa antes de EDITAR
-    @PostMapping("task/edit/{id}")
-    public String editarTarefa(@PathVariable Long id, ModelMap model) throws NoSuchFieldException {
-        model.addAttribute("task", taskService.findByIdTask(id));
-        model.addAttribute("resps", responsavelService.findAllResponsavel());
+    @PostMapping("/task/edit")
+    public String editarTarefa(@Valid @ModelAttribute("task") Task taskEditada,
+                               BindingResult result, ModelMap model,
+                               RedirectAttributes redirectAttributes) throws NoSuchFieldException {
 
-        return "form-task";
-    }
-
-    // Editar uma tarefa antes de EDITAR
-    @PostMapping("task/edit")
-    public String editarTarefa(@Valid @ModelAttribute("task") Task taskEdited, BindingResult result, ModelMap model) throws NoSuchFieldException {
-        String msg = "Tarefa para editar: ";
         if (result.hasErrors()) {
-            // Se houver erros, re-popule o que a página precisa e retorne
             model.addAttribute("responsavel", new Responsavel());
-            model.addAttribute("resps", responsavelService.findAllResponsavel());
-            return "form-task"; // Retorna para a página de formulário com os erros
-        }
-            System.err.println(msg + taskEdited);
-        if ( taskEdited.getConcluido()) {
-            System.err.println(msg + taskEdited);
-            Task taskOld = taskService.findByIdTask(taskEdited.getId());
-            taskEdited.isConcluido();
-        }else {
-            System.err.println(msg + taskEdited);
-        }
-            System.err.println(msg + taskEdited);
 
-        taskService.saveTask(taskEdited);
+            return "redirect:/home";
+        }
+
+
+        Task taskOriginal = taskService.findByIdTask(taskEditada.getId());
+        taskEditada.setConcluido(taskOriginal.getConcluido());
+
+        taskService.saveTask(taskEditada);
+
+        // Adicione a mensagem de SUCESSO aqui
+        redirectAttributes.addFlashAttribute("mensagemSucesso", "Tarefa atualizada com sucesso!");
 
         return "redirect:/home";
     }

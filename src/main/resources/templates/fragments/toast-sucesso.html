@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<body>
+
+<!--
+  Este é o fragmento do "Toast".
+  - Ele só vai aparecer (th:if) se o atributo "mensagemSucesso" existir.
+  - Ele usa as classes do Bootstrap para um alerta verde (alert-success).
+  - É "dismissible" (fechável) e tem um fade-in (fade show).
+-->
+<div th:fragment="toast-sucesso"
+     th:if="${mensagemSucesso}"
+     class="alert alert-success alert-dismissible fade show"
+     role="alert"
+     id="toast-sucesso"
+     style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+
+    <!-- A mensagem vinda do Controller será impressa aqui -->
+    <strong th:text="${mensagemSucesso}"></strong>
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+</body>
+</html>

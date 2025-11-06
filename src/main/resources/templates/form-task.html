@@ -56,9 +56,9 @@
         </div>
 
         <div class="mb-4">
-            <label class="form-label" for="statusTarefa">Status</label>
-            <p type="text" name="" id="statusTarefa" th:text="*{getConcluido()}  ? 'Concluído' : 'Em aberto'"></p>
-            <input disabled class="form-control mb-2" type="hidden" name="" id="" th:field="*{concluido}">
+            <label class="form-label" >Status</label>
+            <input disabled class="form-control mb-2" type="text" th:value="*{getConcluido()}  ? 'Concluído' : 'Em aberto'">
+            <input type="hidden" th:field="*{concluido}">
         </div>
 
 

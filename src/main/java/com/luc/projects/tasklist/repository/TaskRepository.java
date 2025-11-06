@@ -10,4 +10,7 @@ import java.util.Optional;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
+    boolean existsByDescricao(String descricao);
+    Task findByDescricao(String descricao);
+
 }
