@@ -21,7 +21,7 @@ public class ResponsavelController {
         this.responsavelService = responsavelService;
     }
 
-    // criar
+    // Salva o novo responsável após a validação @Valid, a classe BindingResult recebe os erros de validação e retorna a página 'form-task' informando os erros.
     @PostMapping("save")
     public String newResponsavel(@Valid @ModelAttribute("responsavel") Responsavel responsavel,
                                  BindingResult result, ModelMap model){
@@ -33,8 +33,5 @@ public class ResponsavelController {
         responsavelService.createResponsavel(responsavel);
         return "redirect:/task/new";
     }
-    // ver um
-
-    // deletar
 
 }

@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
         return "pagina-de-erro";
     }
 
-    // Você pode adicionar quantos handlers quiser para exceções específicas:
+    // Pode adicionar quantos handlers quiser para exceções específicas:
     // @ExceptionHandler(MinhaExceptionCustomizada.class)
     // @ExceptionHandler(DataIntegrityViolationException.class)
     // etc.

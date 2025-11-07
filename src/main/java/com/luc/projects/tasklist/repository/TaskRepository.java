@@ -9,8 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-
+    // Retorna 'true' ou 'false' verificando se uma tarefa existe pela descrição
     boolean existsByDescricao(String descricao);
+
+    // Retorna uma tarefa a partir de uma descrição informada
     Task findByDescricao(String descricao);
 
 }

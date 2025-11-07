@@ -50,11 +50,6 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.deleteById(id);
     }
 
-    @Override
-    public Task updateTask(Long id, Task newTask) {
-        return null;
-    }
-
     public boolean descricaoJaExiste(String descricao) {
         return taskRepository.existsByDescricao(descricao);
     }
@@ -81,13 +76,4 @@ public class TaskServiceImpl implements TaskService {
         return false;
     }
 
-    @Override
-    public Boolean hasTasks() {
-        var taskList = findAllTask();
-        if (taskList.isEmpty()) {
-            return false;
-        } else {
-            return false;
-        }
-    }
 }

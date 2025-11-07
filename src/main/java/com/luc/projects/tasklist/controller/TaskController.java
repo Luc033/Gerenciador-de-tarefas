@@ -24,7 +24,7 @@ public class TaskController {
         this.responsavelService = responsavelService;
     }
 
-    // Acessar a página de criação de tarefa form-task.html
+    // Acessar a página de criação de tarefa form-task.html e repopula os objetos do thymeleaf
     @GetMapping("task/new")
     public String novaTarefa(ModelMap model) {
         model.addAttribute("task", new Task());
@@ -33,7 +33,8 @@ public class TaskController {
         return "form-task";
     }
 
-    // Criar nova tarefa
+    // Criar nova tarefa após validar os dados com @Valid e com BindingResult retornamos os erros ao usuários.
+    // Além de verificar os dados de entrada, também é verificado se a descrição da tarefa será duplicada.
     @PostMapping("/task/save")
     public String novaTarefa(@Valid @ModelAttribute("task") Task newTask,
                              BindingResult result, ModelMap model,
@@ -45,6 +46,7 @@ public class TaskController {
 
             return "redirect:/home";
         }
+        // Verifica se a descrição da nova tarefa já existe e retorna um erro antes de salvar no banco de dados.
         if (taskService.descricaoJaExiste(newTask.getDescricao())) {
             result.rejectValue("descricao", "error.descricao", "Este nome de tarefa já está em uso.");
             model.addAttribute("responsavel", new Responsavel());
@@ -52,7 +54,10 @@ public class TaskController {
             return "form-task";
         }
 
+        // Define por padrão o atributo concluido como falso (tarefa em aberto)
         newTask.setConcluido(false);
+
+        // Try-catch pode retornar duas exceções, conforme definido no métido saveTask(), contudo, é feito um tratamento genérico, pois o resultado é quase o mesmo: a terfa já existe
         try{
             taskService.saveTask(newTask);
         }catch(Exception e){
@@ -69,14 +74,14 @@ public class TaskController {
 
     }
 
-    // Remover
+    // Remove a tarefa por ID
     @GetMapping("task/delete/{id}")
     public String deletarTarefa(@PathVariable("id") Long id, ModelMap modalMap) {
         taskService.deleteByIdTask(id);
         return "redirect:/home";
     }
 
-    // Ver uma tarefa antes de EDITAR
+    // Retorna os dados de uma tarefa antes de EDITAR para visuação no HTML
     @GetMapping("task/edit/{id}")
     public String preEditarTarefa(@PathVariable Long id, ModelMap model) throws NoSuchFieldException {
         model.addAttribute("task", taskService.findByIdTask(id));
@@ -86,19 +91,19 @@ public class TaskController {
         return "form-task";
     }
 
-
+    // As tarefas já salvas, possuem a mesma validação de dados das tarefas novas, com exceção do nome da tarefa, pois aqui é permitido manter a descricação da tarefa para não se caracterizar como duplicidade, uma vez que a descrição desta tarefa já existia.
     @PostMapping("/task/edit")
     public String editarTarefa(@Valid @ModelAttribute("task") Task taskEditada,
                                BindingResult result, ModelMap model,
                                RedirectAttributes redirectAttributes) throws NoSuchFieldException {
-
+        //Validação dos dados de entrada e retorno visual com os erros ao usuário
         if (result.hasErrors()) {
             model.addAttribute("responsavel", new Responsavel());
 
             return "redirect:/home";
         }
 
-
+        // taskOriginal é instanciado para manter o atributo concluído da tarefa que está sendo editada, uma vez que este atributo somente é alterado em /home
         Task taskOriginal = taskService.findByIdTask(taskEditada.getId());
         taskEditada.setConcluido(taskOriginal.getConcluido());
 
@@ -111,18 +116,21 @@ public class TaskController {
     }
 
 
-    // Ver lista
+    // Retorna uma lista de tarefas ao HTML
     @GetMapping("/home")
     public String verListaTarefas(ModelMap model) {
         model.addAttribute("tasks", taskService.findAllTask());
         return "home";
     }
 
+    // Redireciona ao /home em caso de URL sem endpoint
     @GetMapping("/")
     public String redirecionarHome(ModelMap model) {
         return verListaTarefas(model);
     }
 
+    // Altera o atributo 'concluido' da tarefa de 'false' (em aberto) para 'true' (Concluído)
+    // Também é verificado se a tarefa já está concluída para não realizar a mesma operação.
     @GetMapping("task/completed/{id}")
     public String completarTarefa(@PathVariable Long id, ModelMap model) throws NoSuchFieldException {
         var t = taskService.findByIdTask(id);
@@ -135,6 +143,7 @@ public class TaskController {
         }
     }
 
+    // Endpoint /aboutme para mais informações do sistema
     @GetMapping("aboutme")
     public String aboutMe(ModelMap model) {
         return "aboutme";
